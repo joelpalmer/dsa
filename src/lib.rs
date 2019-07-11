@@ -52,6 +52,19 @@ pub fn merge_sort(list: &mut Vec<i32>) {
         }
     }
 }
+
+/// Max Subarray Sum
+pub fn max_subarray_sum(a: &[i32]) -> i32 {
+    let mut ans = a[0];
+    let mut sum = a[0];
+
+    for i in 1..a.len() {
+        ans = std::cmp::max(a[i], ans + a[i]);
+        sum = std::cmp::max(sum, ans);
+    }
+
+    sum
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -68,5 +81,10 @@ mod tests {
         let mut l = vec![3, 1, 5, 4, 2];
         merge_sort(&mut l);
         assert_eq!(l, vec![1, 2, 3, 4, 5]);
+    }
+
+    #[test]
+    fn test_max_sumarray_sum() {
+        assert_eq!(6, max_subarray_sum(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]));
     }
 }
