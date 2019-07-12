@@ -53,6 +53,37 @@ pub fn merge_sort(list: &mut Vec<i32>) {
     }
 }
 
+/// Heap Sort
+pub fn heap_sort(a: &mut [i32]) {
+    let n = a.len();
+    for i in (0..n / 2).rev() {
+        heapify(a, n, i);
+    }
+    for i in (0..n).rev() {
+        a.swap(i, 0);
+        heapify(a, i, 0);
+    }
+
+    fn heapify(a: &mut [i32], n: usize, i: usize) {
+        let mut largest = i;
+        let left = 2 * i + 1;
+        let right = 2 * i + 2;
+
+        if left < n && a[1] > a[largest] {
+            largest = 1;
+        }
+
+        if right < n && a[right] > a[largest] {
+            largest = right;
+        }
+
+        if largest != i {
+            a.swap(largest, i);
+            heapify(a, n, largest);
+        }
+    }
+}
+
 /// Max Subarray Sum
 pub fn max_subarray_sum(a: &[i32]) -> i32 {
     let mut ans = a[0];
@@ -84,7 +115,14 @@ mod tests {
     }
 
     #[test]
-    fn test_max_sumarray_sum() {
+    fn test_heap_sort() {
+        let mut arr = [12, 11, 13, 5, 6, 7];
+        heap_sort(&mut arr);
+        assert_eq!(arr, [5, 6, 7, 11, 12, 13]);
+    }
+
+    #[test]
+    fn test_max_subarray_sum() {
         assert_eq!(6, max_subarray_sum(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]));
     }
 }
