@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Joel Palmer <joel@joel.systems>"]
 edition = "2018"
 repository = "https://github.com/joelpalmer/dsa"
+description = "Data Structures & Algorithms in Rust"
 readme = "README.MD"
 homepage = "https://github.com/joelpalmer/dsa"
 documentation = "https://docs.rs/dsar"
