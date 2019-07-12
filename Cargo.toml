@@ -1,9 +1,14 @@
 [package]
-name = "dsa"
+name = "dsar"
 version = "0.1.0"
-authors = ["Joel Palmer <joelpalmer@gmail.com>"]
+authors = ["Joel Palmer <joel@joel.systems>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+repository = "https://github.com/joelpalmer/dsa"
+readme = "README.MD"
+homepage = "https://github.com/joelpalmer/dsa"
+documentation = "https://docs.rs/dsar"
+license = "Apache-2.0"
+keywords = ["sorting", "sort"]
+categories = ["algorithms"]
 
 [dependencies]

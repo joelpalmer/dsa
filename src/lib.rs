@@ -1,3 +1,4 @@
+//! Data Structures & Algorithms in Rust
 /// Insertion sort (swapping)
 pub fn insertion_sort<T: Ord>(list: &mut [T]) {
     // handle empty lists or lists w/ 1 item
