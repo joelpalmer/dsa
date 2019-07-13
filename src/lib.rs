@@ -1,3 +1,4 @@
+#![warn(missing_docs)]
 //! Data Structures & Algorithms in Rust
 /// Insertion sort (swapping)
 pub fn insertion_sort<T: Ord>(list: &mut [T]) {
@@ -107,6 +108,20 @@ struct PQElement {
     value: i32,
     priority: i32,
 }
+
+impl PriorityQueue {
+    /// Creates a new empty `PriorityQueue`.
+    pub fn new() -> Self {
+        PriorityQueue {
+            elements: Vec::new(),
+        }
+    }
+    /// Adds an element to the `PriorityQueue` according to priority.
+    pub fn enqueue(&mut self, value: i32, priority: i32) -> Option<i32> {
+        self.elements.push(PQElement { value, priority });
+        None
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -135,5 +150,11 @@ mod tests {
     #[test]
     fn test_max_subarray_sum() {
         assert_eq!(6, max_subarray_sum(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+    }
+
+    #[test]
+    fn test_priority_queue() {
+        let mut pq = PriorityQueue::new();
+        pq.enqueue(5, 5);
     }
 }
