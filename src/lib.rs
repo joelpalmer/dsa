@@ -105,8 +105,9 @@ pub struct PriorityQueue {
     elements: Vec<PQElement>,
 }
 
+/// Priority Queue Element
 #[derive(Debug, Copy, Clone, PartialEq)]
-struct PQElement {
+pub struct PQElement {
     value: i32,
     priority: i32,
 }
@@ -132,6 +133,11 @@ impl PriorityQueue {
         if !is_queued {
             self.elements.push(pqe);
         }
+    }
+
+    /// Removes highest priority element & returns it.
+    pub fn dequeue() -> Option<PQElement> {
+        None
     }
 }
 #[cfg(test)]
