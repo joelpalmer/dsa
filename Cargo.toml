@@ -1,6 +1,6 @@
 [package]
 name = "dsar"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Joel Palmer <joel@joel.systems>"]
 edition = "2018"
 repository = "https://github.com/joelpalmer/dsa"
@@ -9,7 +9,7 @@ readme = "README.MD"
 homepage = "https://github.com/joelpalmer/dsa"
 documentation = "https://docs.rs/dsar"
 license = "Apache-2.0"
-keywords = ["sorting", "sort"]
-categories = ["algorithms"]
+keywords = ["sorting", "sort", "queue"]
+categories = ["algorithms", "data-structures"]
 
 [dependencies]

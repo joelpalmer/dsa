@@ -97,6 +97,16 @@ pub fn max_subarray_sum(a: &[i32]) -> i32 {
 
     sum
 }
+
+/// Priority Queue
+pub struct PriorityQueue {
+    elements: Vec<PQElement>,
+}
+
+struct PQElement {
+    value: i32,
+    priority: i32,
+}
 #[cfg(test)]
 mod tests {
     use super::*;
