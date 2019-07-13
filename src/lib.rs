@@ -100,10 +100,12 @@ pub fn max_subarray_sum(a: &[i32]) -> i32 {
 }
 
 /// Priority Queue
+#[derive(PartialEq)]
 pub struct PriorityQueue {
     elements: Vec<PQElement>,
 }
 
+#[derive(Debug, Copy, Clone, PartialEq)]
 struct PQElement {
     value: i32,
     priority: i32,
@@ -117,9 +119,19 @@ impl PriorityQueue {
         }
     }
     /// Adds an element to the `PriorityQueue` according to priority.
-    pub fn enqueue(&mut self, value: i32, priority: i32) -> Option<i32> {
-        self.elements.push(PQElement { value, priority });
-        None
+    pub fn enqueue(&mut self, value: i32, priority: i32) {
+        let pqe = PQElement { value, priority };
+        let mut is_queued = false;
+        for i in 0..self.elements.len() {
+            if self.elements[i].priority > pqe.priority {
+                self.elements.insert(i, pqe);
+                is_queued = true;
+                break;
+            }
+        }
+        if !is_queued {
+            self.elements.push(pqe);
+        }
     }
 }
 #[cfg(test)]
@@ -155,6 +167,12 @@ mod tests {
     #[test]
     fn test_priority_queue() {
         let mut pq = PriorityQueue::new();
-        pq.enqueue(5, 5);
+        pq.enqueue(5, 1);
+        pq.enqueue(15, 3);
+        pq.enqueue(25, 2);
+        pq.enqueue(51, 4);
+        pq.enqueue(11, 5);
+        assert_eq!(pq.elements[0].value, 5);
+        assert_eq!(pq.elements[4].value, 11);
     }
 }
