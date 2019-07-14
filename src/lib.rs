@@ -1,3 +1,4 @@
+#![warn(missing_docs)]
 //! Data Structures & Algorithms in Rust
 /// Insertion sort (swapping)
 pub fn insertion_sort<T: Ord>(list: &mut [T]) {
@@ -97,6 +98,67 @@ pub fn max_subarray_sum(a: &[i32]) -> i32 {
 
     sum
 }
+
+/// Priority Queue
+#[derive(PartialEq)]
+pub struct PriorityQueue {
+    elements: Vec<PQElement>,
+}
+
+/// Priority Queue Element
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub struct PQElement {
+    value: i32,
+    priority: i32,
+}
+
+impl PriorityQueue {
+    /// Creates a new empty `PriorityQueue`.
+    pub fn new() -> Self {
+        PriorityQueue {
+            elements: Vec::new(),
+        }
+    }
+    /// Adds an element to the `PriorityQueue` according to priority.
+    pub fn enqueue(&mut self, value: i32, priority: i32) {
+        let pqe = PQElement { value, priority };
+        let mut is_queued = false;
+        for i in 0..self.elements.len() {
+            if self.elements[i].priority > pqe.priority {
+                self.elements.insert(i, pqe);
+                is_queued = true;
+                break;
+            }
+        }
+        if !is_queued {
+            self.elements.push(pqe);
+        }
+    }
+
+    /// Removes highest priority element & returns it.
+    pub fn dequeue(&mut self) -> Option<PQElement> {
+        match self.elements.is_empty() {
+            true => None,
+            false => Some(self.elements.remove(0)),
+        }
+    }
+
+    /// Returns highest priority element but doesn't remove it.
+    pub fn front(&self) -> Option<PQElement> {
+        match self.elements.is_empty() {
+            true => None,
+            false => Some(self.elements[0]),
+        }
+    }
+
+    /// Returns lowest priority element but doesn't remove it.
+    pub fn rear(&self) -> Option<PQElement> {
+        match self.elements.is_empty() {
+            true => None,
+            false => Some(self.elements[self.elements.len() - 1]),
+        }
+    }
+}
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -125,5 +187,21 @@ mod tests {
     #[test]
     fn test_max_subarray_sum() {
         assert_eq!(6, max_subarray_sum(&[-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+    }
+
+    #[test]
+    fn test_priority_queue() {
+        let mut pq = PriorityQueue::new();
+        pq.enqueue(5, 1);
+        pq.enqueue(15, 3);
+        pq.enqueue(25, 2);
+        pq.enqueue(51, 4);
+        pq.enqueue(11, 5);
+        assert_eq!(pq.elements[0].value, 5);
+        assert_eq!(pq.elements[4].value, 11);
+        pq.dequeue();
+        assert_eq!(pq.elements[0].value, 25);
+        assert_eq!(pq.front(), Some(pq.elements[0]));
+        assert_eq!(pq.rear(), Some(pq.elements[pq.elements.len() - 1]));
     }
 }
