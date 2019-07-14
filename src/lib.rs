@@ -150,6 +150,14 @@ impl PriorityQueue {
             false => Some(self.elements[0]),
         }
     }
+
+    /// Returns lowest priority element but doesn't remove it.
+    pub fn rear(&self) -> Option<PQElement> {
+        match self.elements.is_empty() {
+            true => None,
+            false => Some(self.elements[self.elements.len() - 1]),
+        }
+    }
 }
 #[cfg(test)]
 mod tests {
@@ -194,5 +202,6 @@ mod tests {
         pq.dequeue();
         assert_eq!(pq.elements[0].value, 25);
         assert_eq!(pq.front(), Some(pq.elements[0]));
+        assert_eq!(pq.rear(), Some(pq.elements[pq.elements.len() - 1]));
     }
 }
