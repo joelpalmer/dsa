@@ -136,8 +136,11 @@ impl PriorityQueue {
     }
 
     /// Removes highest priority element & returns it.
-    pub fn dequeue() -> Option<PQElement> {
-        None
+    pub fn dequeue(&mut self) -> Option<PQElement> {
+        match self.elements.is_empty() {
+            true => None,
+            false => Some(self.elements.remove(0)),
+        }
     }
 }
 #[cfg(test)]
@@ -180,5 +183,7 @@ mod tests {
         pq.enqueue(11, 5);
         assert_eq!(pq.elements[0].value, 5);
         assert_eq!(pq.elements[4].value, 11);
+        pq.dequeue();
+        assert_eq!(pq.elements[0].value, 25);
     }
 }
